@@ -1,0 +1,477 @@
+﻿<krpano version="1.20.9" title="ebrochure">
+	
+	<plugin name="soundinterface" url="plugns/soundinterface.swf" alturl="plugns/soundinterface.js" preload="true" rootpath="sfx" volume="1.0" mute="false" />
+	
+	<!-- startup action - load the first scene -->
+	<action name="startup" autorun="onstart">
+		if(startscene === null OR !scene[get(startscene)], copy(startscene,scene[0].name); );
+		loadscene(get(startscene), null, MERGE);
+		if(startactions !== null, startactions() );
+	</action>
+	
+	<scene name="scene_zastrahovatelno-drujestvo-01" title="zastrahovatelno-drujestvo-01" onstart="" havevrimage.mobilevr="false" havevrimage.no-mobilevr="true" thumburl="panos/zastrahovatelno-drujestvo-01/thumb.jpg" lat="" lng="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="350" vlookat="-25" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/zastrahovatelno-drujestvo-01/preview.jpg" />
+
+		<image if="!(webvr.isenabled OR device.mobilevr)">
+			<cube url="panos/zastrahovatelno-drujestvo-01/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+
+		<image if="webvr.isenabled OR device.mobilevr">
+			<cube url="panos/zastrahovatelno-drujestvo-01/vr/pano_%s.jpg" />
+		</image>
+		
+		<hotspot name="spt1-normal" url="gfx/button-eyeball-vr.png" ath="21.5" atv="2.5" onclick="loadscene(scene_zastrahovatelno-drujestvo-02,null,null,BLEND(1));" />
+		<hotspot name="spt2-normal" url="gfx/button-eyeball-vr.png" ath="307.5" atv="1.5" onclick="loadscene(scene_zastrahovatelno-drujestvo-03,null,null,BLEND(1));" />
+		
+		<hotspot name="pop-up-one-normal" url="gfx/plus-icon.png" style="ai|z15" visible="true" keep="false" depth="1350" depth.mobile="900" distorted="true" ath="25" atv="-5" ox="-150" oy="-70" ox.mobile="-95" oy.mobile="-45" scale.mobile="0.7" scale.normal="1" crop="0|0|42|42" onovercrop="0|42|42|42" onclick="dsable-info(); move-out-ui(); set(layer[pin-one-normal].visible, true); delayedcall(0.35, set(layer[slide-menu].visible, true); tween(layer[slide-menu].alpha, 1, 0.35, default););" onclick.mobile="dsable-info(); move-out-ui(); set(layer[pin-one-mobile].visible, true); delayedcall(0.35, set(layer[popup-menu].visible, true); tween(layer[popup-menu].alpha, 1, 0.35, default););" />
+	
+		<hotspot name="pop-up-one-vr" url="gfx/plus-icon.png" style="ai|z15|vr" visible="false" keep="false" ath="25" atv="-5" ox="-150" oy="-70" scale="1.25" crop="0|0|42|42" onclick="enter-pin-one();" />
+		
+		<hotspot name="pop-up-two-normal" url="gfx/plus-icon.png" style="ai|z15" visible="true" keep="false" depth="1350" depth.mobile="900" distorted="true" rotate="8" ath="27.5" atv="-30" ox="-150" oy="-70" ox.mobile="-95" oy.mobile="-45" scale.mobile="0.7" scale.normal="1" crop="0|0|42|42" onovercrop="0|42|42|42" onclick="dsable-info(); move-out-ui(); set(layer[pin-two-normal].visible, true); delayedcall(0.35, set(layer[slide-menu].visible, true); tween(layer[slide-menu].alpha, 1, 0.35, default););" onclick.mobile="dsable-info(); move-out-ui(); set(layer[pin-two-mobile].visible, true); delayedcall(0.35, set(layer[popup-menu].visible, true); tween(layer[popup-menu].alpha, 1, 0.35, default););" />
+	
+		<hotspot name="pop-up-two-vr" url="gfx/plus-icon.png" style="ai|z15|vr" visible="false" keep="false" ath="27.5" atv="-30" rotate="8" ox="-150" oy="-70" scale="1.25" crop="0|0|42|42" onclick="enter-pin-two();" />
+		
+		<hotspot name="pop-up-three-normal" url="gfx/plus-icon.png" style="ai|z15" visible="true" keep="false" depth="1350" depth.mobile="900" distorted="true" ath="15" atv="5" ox="-150" oy="-70" ox.mobile="-95" oy.mobile="-45" scale.mobile="0.7" scale.normal="1" crop="0|0|42|42" onovercrop="0|42|42|42" onclick="dsable-info(); move-out-ui(); set(layer[pin-three-normal].visible, true); delayedcall(0.35, set(layer[slide-menu].visible, true); tween(layer[slide-menu].alpha, 1, 0.35, default););" onclick.mobile="dsable-info(); move-out-ui(); set(layer[pin-three-mobile].visible, true); delayedcall(0.35, set(layer[popup-menu].visible, true); tween(layer[popup-menu].alpha, 1, 0.35, default););" />
+	
+		<hotspot name="pop-up-three-vr" url="gfx/plus-icon.png" style="ai|z15|vr" visible="false" keep="false" ath="15" atv="5" ox="-150" oy="-70" scale="1.25" crop="0|0|42|42" onclick="enter-pin-three();" />
+		
+		<!-- Виртуална Реалност -->
+		<!-- Първи Пин -->
+
+		<hotspot name="pin-one-vr-photo" url="gfx/pin-one-photo.png" ath="45" atv="0" style="z20|cptr|vr" visible="false" keep="false" alpha="0" ox="0" oy="-150" />
+		<hotspot name="pin-one-vr-close" url="gfx/menu-close-vr.png" ath="45" atv="0" style="z20|vr" visible="false" keep="false" alpha="0" ox="330" oy="-455" crop="0|0|90|90" onovercrop="0|90|90|90" onclick="exit-pin-one();" />
+
+		<!-- Втори Пин -->
+
+		<hotspot name="pin-two-vr-photo" url="gfx/pin-two-photo.png" ath="335" atv="0" style="z20|cptr|vr" visible="false" keep="false" alpha="0" ox="0" oy="-350" />
+		<hotspot name="pin-two-vr-close" url="gfx/menu-close-vr.png" ath="335" atv="0" style="z20|vr" visible="false" keep="false" alpha="0" ox="330" oy="-655" crop="0|0|90|90" onovercrop="0|90|90|90" onclick="exit-pin-two();" />
+
+		<!-- Трети Пин -->
+
+		<hotspot name="pin-three-vr-photo" url="gfx/pin-three-photo.png" ath="335" atv="0" style="z20|cptr|vr" visible="false" keep="false" alpha="0" ox="0" oy="-150" />
+		<hotspot name="pin-three-vr-close" url="gfx/menu-close-vr.png" ath="335" atv="0" style="z20|vr" visible="false" keep="false" alpha="0" ox="330" oy="-455" crop="0|0|90|90" onovercrop="0|90|90|90" onclick="exit-pin-three();" />
+		
+	</scene>
+
+	<scene name="scene_zastrahovatelno-drujestvo-02" title="zastrahovatelno-drujestvo-02" onstart="" havevrimage.mobilevr="false" havevrimage.no-mobilevr="true" thumburl="panos/zastrahovatelno-drujestvo-02/thumb.jpg" lat="" lng="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="335" vlookat="-40" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/zastrahovatelno-drujestvo-02/preview.jpg" />
+
+		<image if="!(webvr.isenabled OR device.mobilevr)">
+			<cube url="panos/zastrahovatelno-drujestvo-02/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+
+		<image if="webvr.isenabled OR device.mobilevr">
+			<cube url="panos/zastrahovatelno-drujestvo-02/vr/pano_%s.jpg" />
+		</image>
+		
+		<hotspot name="spt3-normal" url="gfx/button-eyeball-vr.png" ath="273" atv="1" onclick="loadscene(scene_zastrahovatelno-drujestvo-01,null,null,BLEND(1));" />
+		
+	</scene>
+
+	<scene name="scene_zastrahovatelno-drujestvo-03" title="zastrahovatelno-drujestvo-03" onstart="" havevrimage.mobilevr="false" havevrimage.no-mobilevr="true" thumburl="panos/zastrahovatelno-drujestvo-03/thumb.jpg" lat="" lng="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="305" vlookat="-15" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/zastrahovatelno-drujestvo-03/preview.jpg" />
+
+		<image if="!(webvr.isenabled OR device.mobilevr)">
+			<cube url="panos/zastrahovatelno-drujestvo-03/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+
+		<image if="webvr.isenabled OR device.mobilevr">
+			<cube url="panos/zastrahovatelno-drujestvo-03/vr/pano_%s.jpg" />
+		</image>
+		
+		<hotspot name="spt4-normal" url="gfx/button-eyeball-vr.png" ath="84.5" atv="1" onclick="loadscene(scene_zastrahovatelno-drujestvo-01,null,null,BLEND(1));" />
+		
+		<hotspot name="pop-up-four-normal" url="gfx/plus-icon.png" style="ai|z15" visible="true" keep="false" depth="1350" depth.mobile="900" distorted="true" ath="290" atv="-10" ox="-150" oy="-70" ox.mobile="-95" oy.mobile="-45" scale.mobile="0.7" scale.normal="1" crop="0|0|42|42" onovercrop="0|42|42|42" onclick="dsable-info(); move-out-ui(); set(layer[pin-four-normal].visible, true); delayedcall(0.35, set(layer[slide-menu].visible, true); tween(layer[slide-menu].alpha, 1, 0.35, default););" onclick.mobile="dsable-info(); move-out-ui(); set(layer[pin-four-mobile].visible, true); delayedcall(0.35, set(layer[popup-menu].visible, true); tween(layer[popup-menu].alpha, 1, 0.35, default););" />
+	
+		<hotspot name="pop-up-four-vr" url="gfx/plus-icon.png" style="ai|z15|vr" visible="false" keep="false" ath="290" atv="-10" ox="-150" oy="-70" scale="1.25" crop="0|0|42|42" onclick="enter-pin-four();" />
+		
+		<!-- Четвърти Пин -->
+	
+		<hotspot name="pin-four-vr-photo" url="gfx/pin-four-photo.png" ath="240" atv="0" style="z20|cptr|vr" visible="false" keep="false" alpha="0" ox="0" oy="-150" />
+		<hotspot name="pin-four-vr-close" url="gfx/menu-close-vr.png" ath="240" atv="0" style="z20|vr" visible="false" keep="false" alpha="0" ox="330" oy="-455" crop="0|0|90|90" onovercrop="0|90|90|90" onclick="exit-pin-four();" />
+		
+	</scene>
+	
+	<include url="plugns/webvr.xml" />
+	
+	<!-- Интро -->
+	
+	<layer name="intro" type="container" style="vt|acl|z5|ai" handcursor="false" width="100%" height="100%" x="0" bgcolor="0x081c3a" bgcapture="true" bgalpha="0.40" >
+		
+			<layer name="intro-logo-normal" devices="desktop" url="gfx/intro-logo-normal.png" style="vt|z10|acb|cptr" x="0" y="330" />
+			<layer name="intro-info-normal" devices="desktop" url="gfx/intro-info-normal.png" style="vt|z10|acb|cptr" x="0" y="30" />
+			<layer name="intro-enter-normal" devices="desktop" url="gfx/intro-button-enter.png" style="vt|z10|acb" x="0" y="200" crop="0|0|306|66" onovercrop="0|66|306|66" onclick="hideintroimage();" />
+			<layer name="intro-devices-normal" devices="desktop" url="gfx/intro-devices-normal.png" style="vt|z10|abr|cptr" x="50" y="30" />
+			
+			<layer name="intro-logo-tablet" devices="tablet" url="gfx/intro-logo-normal.png" scale="0.9" style="vt|z10|acb|cptr" x="0" y="540" />
+			<layer name="intro-info-tablet" devices="tablet" url="gfx/intro-info-mobile.png" style="vt|z10|acb|cptr" x="0" y="330" />
+			<layer name="intro-enter-tablet" devices="tablet" url="gfx/intro-button-enter.png" style="vt|z10|acb" x="0" y="200" crop="0|0|306|66" onovercrop="0|66|306|66" onclick="hideintroimage();" />
+		
+			<layer name="intro-logo-mobile" devices="mobile|mobilevr" url="gfx/intro-logo-mobile.png" scale="0.7" style="vt|z10|acb|cptr" x="0" y="350" />
+			<layer name="intro-info-mobile" devices="mobile|mobilevr" url="gfx/intro-info-mobile.png" scale="0.7" style="vt|z10|acb|cptr" x="0" y="90" />
+			<layer name="intro-enter-mobile" devices="mobile|mobilevr" url="gfx/intro-button-enter.png" style="vt|z10|acb" x="0" y="210" crop="0|0|306|66" onovercrop="0|66|306|66" onclick="hideintroimage();" />
+			<layer name="intro-devices-mobile" devices="mobile|mobilevr" url="gfx/intro-devices-mobile.png" scale="0.7" style="vt|z10|acb|cptr" align="bottomcenter" x="0" y="30" />
+			
+	</layer>
+	
+	<action name="hideintroimage">
+		if(layer[intro].enabled,
+			set(layer[intro].enabled, false);
+			set(layer[intro-logo-normal].enabled, false);
+			set(layer[intro-info-normal].enabled, false);
+			set(layer[intro-enter-normal].enabled, false);
+			set(layer[intro-devices-normal].enabled, false);
+			set(layer[intro-logo-tablet].enabled, false);
+			set(layer[intro-info-tablet].enabled, false);
+			set(layer[intro-enter-tablet].enabled, false);
+			set(layer[intro-logo-mobile].enabled, false);
+			set(layer[intro-info-mobile].enabled, false);
+			set(layer[intro-enter-mobile].enabled, false);
+			set(layer[intro-devices-mobile].enabled, false);
+			tween(layer[intro].alpha, 0.0, 0.35, default, removelayer(intro));
+			tween(layer[intro-logo-normal].alpha, 0.0, 0.35, default, removelayer(intro-logo-normal));
+			tween(layer[intro-info-normal].alpha, 0.0, 0.35, default, removelayer(intro-info-normal));
+			tween(layer[intro-enter-normal].alpha, 0.0, 0.35, default, removelayer(intro-enter-normal));
+			tween(layer[intro-devices-normal].alpha, 0.0, 0.35, default, removelayer(intro-devices-normal));
+			tween(layer[intro-logo-tablet].alpha, 0.0, 0.35, default, removelayer(intro-logo-tablet));
+			tween(layer[intro-info-tablet].alpha, 0.0, 0.35, default, removelayer(intro-info-tablet));
+			tween(layer[intro-enter-tablet].alpha, 0.0, 0.35, default, removelayer(intro-enter-tablet));
+			tween(layer[intro-logo-mobile].alpha, 0.0, 0.35, default, removelayer(intro-logo-mobile));
+			tween(layer[intro-info-mobile].alpha, 0.0, 0.35, default, removelayer(intro-info-mobile));
+			tween(layer[intro-enter-mobile].alpha, 0.0, 0.35, default, removelayer(intro-enter-mobile));
+			tween(layer[intro-devices-mobile].alpha, 0.0, 0.35, default, removelayer(intro-devices-mobile));
+				delayedcall(0.35, 
+					tween(layer[webvr_enterbutton].x, 20, 0.35, default);
+					tween(layer[button-enter-fullscreen].x, 20, 0.35, default);
+					tween(layer[button-exit-fullscreen].x, 20, 0.35, default);
+					tween(layer[button-share].y, 20, 0.35, default);
+				);
+		  );
+	</action>
+	
+	<!-- Мобилно ориентиране -->
+	
+	<events onresize="if(stagewidth GT stageheight, landscapesetup();, portraitsetup(); );" />
+	
+	<action name="landscapesetup">
+		set(layer[share-text-mobile], edge=bottomleft, align=centerbottom, x=30, y=40);
+		set(layer[share-text-tablet], edge=bottomleft, align=centerbottom, x=35, y=40);
+		set(layer[share-info-mobile], edge=topleft, align=centertop, x=30, y=50);
+		set(layer[share-info-tablet], edge=topleft, align=centertop, x=30, y=50);
+		set(layer[follow-youtube-mobile], edge=bottomleft, align=centerbottom, x=242, y=130);
+		set(layer[follow-youtube-tablet], edge=bottomleft, align=centerbottom, x=335, y=170);
+		set(layer[follow-facebook-mobile], edge=bottomleft, align=centerbottom, x=272, y=130);
+		set(layer[follow-facebook-tablet], edge=bottomleft, align=centerbottom, x=380, y=170);
+		set(layer[intro-logo-tablet].y, 280);
+		set(layer[intro-info-tablet].y, 135);
+		set(layer[intro-enter-tablet].y, 40);
+		set(layer[intro-logo-mobile].y, 190);
+		set(layer[intro-info-mobile].y, 95);
+		set(layer[intro-enter-mobile].y, 20);
+		set(layer[intro-devices-mobile].visible, false);
+	</action>
+	
+	<action name="portraitsetup">
+		set(layer[share-text-mobile], edge=topleft, align=centerleft, x=50, y=-30);
+		set(layer[share-text-tablet], edge=topleft, align=centerleft, x=55, y=-30);
+		set(layer[share-info-mobile], edge=bottomleft, align=bottomleft, x=50, y=50);
+		set(layer[share-info-tablet], edge=bottomleft, align=bottomleft, x=50, y=50);
+		set(layer[follow-youtube-mobile], edge=topleft, align=centerleft, x=262, y=-5);
+		set(layer[follow-youtube-tablet], edge=topleft, align=centerleft, x=355, y=5);
+		set(layer[follow-facebook-mobile], edge=topleft, align=centerleft, x=292, y=-5);
+		set(layer[follow-facebook-tablet], edge=topleft, align=centerleft, x=400, y=5);
+		set(layer[intro-logo-tablet].y, 540);
+		set(layer[intro-info-tablet].y, 330);
+		set(layer[intro-enter-tablet].y, 200);
+		set(layer[intro-logo-mobile].y, 350);
+		set(layer[intro-info-mobile].y, 90);
+		set(layer[intro-enter-mobile].y, 210);
+		set(layer[intro-devices-mobile], visible=true, y=30);
+	</action>
+	
+	<!-- Стилове -->
+	
+	<style name="vt" keep="true" visible="true" />
+	<style name="vf" keep="true" visible="false" />
+	<style name="cptr" capture="false" handcursor="false" />
+	<style name="atl" align="topleft" />
+	<style name="acl" align="centerleft" />
+	<style name="abl" align="bottomleft" />
+	<style name="act" align="centertop" />
+	<style name="ac" align="center" />
+	<style name="acb" align="centerbottom" />
+	<style name="atr" align="topright" />
+	<style name="acr" align="rightcenter" />
+	<style name="abr" align="bottomright" />
+	<style name="z5" zorder="5" />
+	<style name="z10" zorder="10" />
+	<style name="z15" zorder="15" />
+	<style name="z20" zorder="20" />
+	<style name="ao" alpha="0" />
+	<style name="ai" alpha="1" />
+	
+	<style name="vr" depth="1700" distorted="true" />
+	
+	<style name="play" url="gfx/button-play.png" x="50" y="50" x.mobile="32" y.mobile="30" crop="0|0|52|52" onovercrop="0|52|52|52" />
+	<style name="pause" url="gfx/button-pause.png" x="50" y="50" x.mobile="32" y.mobile="30" crop="0|0|52|52" onovercrop="0|52|52|52" />
+	<style name="dwn" url="gfx/button-dwn.png" x="107" y="50" x.mobile="89" y.mobile="30" crop="0|0|182|52" onovercrop="0|52|182|52" />
+	<style name="ytb" url="gfx/button-youtube.png" x="107" y="50" x.mobile="89" y.mobile="30" crop="0|0|182|52" onovercrop="0|52|182|52" />
+	<style name="more" url="gfx/button-more.png" x="107" y="50" x.mobile="89" y.mobile="30" crop="0|0|182|52" onovercrop="0|52|182|52" />
+	
+	<style name="txt" type="text" edge="topleft" handcursor="false" width="400" bgalpha="0" css="font-family:Arial; font-size:14px; color:#000000;" vcenter="false" wordwrap="true" />
+	<style name="txtm" type="text" edge="topleft" handcursor="false" width="350" bgalpha="0" css="font-family:Arial; font-size:13px; color:#000000;" vcenter="false" wordwrap="true" />
+	<style name="txtvr" type="text" edge="topleft" handcursor="false" width="420" bgalpha="0" css="font-family:Arial; font-size:14px; color:#000000;" vcenter="false" wordwrap="true" />
+	
+	<!-- Меню -->
+	
+	<layer name="button-share" url="gfx/button-share.png" style="vt|atr|z15" x="20" y="-110" crop="0|0|74|74" onovercrop="0|74|74|74" onclick="move-out-ui(); move-in-slider(); delayedcall(0.35, set(layer[share-menu].visible, true); tween(layer[share-menu].alpha, 1, 0.35, default););" />
+	
+	<layer name="share-menu" type="container" style="vf|ac|z15|ao" width="100%" height="100%" bgcolor="0x081c3a" handcursor="false" bgcapture="true" bgalpha="0.4" >
+		
+		<plugin name="bmap-desktop" url.html5="plugns/bingmaps.js" url.flash="plugns/bingmaps.swf" devices="desktop" align="topleft" width="100%" height="100%" x="0" y="0" keep="true" alpha="0.9" key="Ard8fKGageeE0SQ-d61mCAda9xfM7lNZA9jUNFlo06vIRrOF_zqSyYpfey9D1p7x" maptype="hybrid" culturecode="bg" lat="43.847903" lng="25.951467" zoom="18" bgcolor="0x000000" bgalpha="0.0">
+  			
+			<spot name="bmaps-loc-desktop" url="gfx/bmaps-loc.png" keep="true" lat="43.847903" lng="25.951467" heading="0" active="true" />
+			
+		</plugin>
+		
+		<plugin name="bmap-mobile" url.html5="plugns/bingmaps.js" url.flash="plugns/bingmaps.swf" devices="mobile|tablet" align="topleft" width="100%" height="100%" x="0" y="0" keep="true" alpha="0.9" key="Ard8fKGageeE0SQ-d61mCAda9xfM7lNZA9jUNFlo06vIRrOF_zqSyYpfey9D1p7x" maptype="hybrid" culturecode="bg" lat="43.847903" lng="25.951467" zoom="18" bgcolor="0x000000" bgalpha="0.0">
+  			
+			<spot name="bmaps-loc-mobile" url="gfx/bmaps-loc.png" keep="true" lat="43.847903" lng="25.951467" heading="0" active="true" />
+			
+		</plugin>
+		
+		<layer name="share-close-desktop" url="gfx/menu-close-share.png" devices="normal" style="vt|atr|z20" x="30" y="30" onclick="tween(layer[share-menu].alpha, 0, 0.35, default); delayedcall(0.35, set(layer[share-menu].visible, false); move-in-ui(););" />
+		
+		<layer name="share-close-mobile" url="gfx/menu-close-share.png" devices="mobile" style="vt|atr|z20" x="30" y="30" onclick="tween(layer[share-menu].alpha, 0, 0.35, default); delayedcall(0.35, set(layer[share-menu].visible, false); move-in-ui(););" />
+	
+	</layer>
+	
+	<layer name="button-enter-fullscreen" url="gfx/button-enter-fullscreen.png" style="vt|abr|z15" x="-110" y="20" crop="0|0|74|74" onovercrop="0|74|74|74" onclick="set(layer[button-enter-fullscreen].visible, false); set(layer[button-exit-fullscreen].visible, true); set(fullscreen, true);" />
+	<layer name="button-exit-fullscreen" url="gfx/button-exit-fullscreen.png" style="vf|abr|z15" x="-110" y="20" crop="0|0|74|74" onovercrop="0|74|74|74" onclick="set(layer[button-exit-fullscreen].visible, false); set(layer[button-enter-fullscreen].visible, true); set(fullscreen, false);" />
+	
+	<!-- Слайдер -->
+	
+	<layer name="slide-menu" devices="normal" type="container" style="vf|acl|z15|ai|cptr" width="100%" height="100%" bgcolor="0x081c3a" bgcapture="true" bgalpha="0.40" >
+		
+		<layer name="slider-close" url="gfx/menu-close-share.png" style="vt|atr|z20" x="30" y="30" onclick="slide-out-menu(); move-in-ui();" />
+		
+		<!-- Продукти/Десктоп-->
+		
+		<layer name="pin-one-normal" type="container" style="vf|ai|z15" width="100%" height="100%" bgcolor="0xFFFFFF" bgcapture="true" bgalpha="0" >
+		
+			<layer name="pin-one-photo-normal" url="gfx/pin-one-photo.png" style="vt|ac|z20|cptr" scale="0.8" />
+			
+		</layer>
+		
+		<layer name="pin-two-normal" type="container" style="vf|ai|z15" width="100%" height="100%" bgcolor="0xFFFFFF" bgcapture="true" bgalpha="0" >
+		
+			<layer name="pin-two-photo-normal" url="gfx/pin-two-photo.png" style="vt|ac|z20|cptr" scale="0.8" />
+			
+		</layer>
+		
+		<layer name="pin-three-normal" type="container" style="vf|ai|z15" width="100%" height="100%" bgcolor="0xFFFFFF" bgcapture="true" bgalpha="0" >
+		
+			<layer name="pin-three-photo-normal" url="gfx/pin-three-photo.png" style="vt|ac|z20|cptr" scale="0.8" />
+			
+		</layer>
+		
+		<layer name="pin-four-normal" type="container" style="vf|ai|z15" width="100%" height="100%" bgcolor="0xFFFFFF" bgcapture="true" bgalpha="0" >
+		
+			<layer name="pin-four-photo-normal" url="gfx/pin-four-photo.png" style="vt|ac|z20|cptr" scale="0.8" />
+			
+		</layer>
+		
+	</layer>
+	
+	<!-- Попъпи -->
+	
+	<layer name="popup-menu" devices="mobile" type="container" style="vf|atl|z15|ao" handcursor="false" width="100%" height="100%" x="0" y="0" bgcolor="0x081c3a" bgcapture="true" bgalpha="0.40" >
+		
+		<layer name="popup-close" url="gfx/menu-close-share.png" style="vt|atr|z20" x="30" y="30" onclick="pop-out-menu(); move-in-ui();" />
+		
+		<!-- Продукти/Мобилни-->
+		
+		<layer name="pin-one-mobile" type="container" style="vf|ai|z15" width="100%" height="100%" bgcolor="0xFFFFFF" bgcapture="true" bgalpha="0" >
+		
+			<layer name="pin-one-photo-mobile" url="gfx/pin-one-photo.png" style="vt|ac|z20|cptr" scale="0.45" />
+			
+		</layer>
+		
+		<layer name="pin-two-mobile" type="container" style="vf|ai|z15" width="100%" height="100%" bgcolor="0xFFFFFF" bgcapture="true" bgalpha="0" >
+		
+			<layer name="pin-two-photo-mobile" url="gfx/pin-two-photo.png" style="vt|ac|z20|cptr" scale="0.45" />
+			
+		</layer>
+		
+		<layer name="pin-three-mobile" type="container" style="vf|ai|z15" width="100%" height="100%" bgcolor="0xFFFFFF" bgcapture="true" bgalpha="0" >
+		
+			<layer name="pin-three-photo-mobile" url="gfx/pin-three-photo.png" style="vt|ac|z20|cptr" scale="0.45" />
+			
+		</layer>
+		
+		<layer name="pin-four-mobile" type="container" style="vf|ai|z15" width="100%" height="100%" bgcolor="0xFFFFFF" bgcapture="true" bgalpha="0" >
+		
+			<layer name="pin-four-photo-mobile" url="gfx/pin-four-photo.png" style="vt|ac|z20|cptr" scale="0.45" />
+			
+		</layer>
+		
+	</layer>
+	
+	<!-- Действия -->
+	
+	<action name="dsable-info">
+		set(layer[pin-one-normal].visible, false);
+		set(layer[pin-two-normal].visible, false);
+		set(layer[pin-three-normal].visible, false);
+		set(layer[pin-four-normal].visible, false);
+		set(layer[pin-one-mobile].visible, false);
+		set(layer[pin-two-mobile].visible, false);
+		set(layer[pin-three-mobile].visible, false);
+		set(layer[pin-four-mobile].visible, false);
+	</action>
+	
+	<action name="enter-pin-one">
+		set(hotspot[pin-one-vr-photo].visible, true);
+		set(hotspot[pin-one-vr-close].visible, true);
+		tween(hotspot[pin-one-vr-photo].alpha, 0.9);
+		tween(hotspot[pin-one-vr-close].alpha, 1);
+		tween(hotspot[pin-one-vr-photo].oy, -130);
+		tween(hotspot[pin-one-vr-close].oy, -435);
+	</action>
+	
+	<action name="enter-pin-two">
+		set(hotspot[pin-two-vr-photo].visible, true);
+		set(hotspot[pin-two-vr-close].visible, true);
+		tween(hotspot[pin-two-vr-photo].alpha, 0.9);
+		tween(hotspot[pin-two-vr-close].alpha, 1);
+		tween(hotspot[pin-two-vr-photo].oy, -330);
+		tween(hotspot[pin-two-vr-close].oy, -635);
+	</action>
+	
+	<action name="enter-pin-three">
+		set(hotspot[pin-three-vr-photo].visible, true);
+		set(hotspot[pin-three-vr-close].visible, true);
+		tween(hotspot[pin-three-vr-photo].alpha, 0.9);
+		tween(hotspot[pin-three-vr-close].alpha, 1);
+		tween(hotspot[pin-three-vr-photo].oy, -130);
+		tween(hotspot[pin-three-vr-close].oy, -435);
+	</action>
+	
+	<action name="enter-pin-four">
+		set(hotspot[pin-four-vr-photo].visible, true);
+		set(hotspot[pin-four-vr-close].visible, true);
+		tween(hotspot[pin-four-vr-photo].alpha, 0.9);
+		tween(hotspot[pin-four-vr-close].alpha, 1);
+		tween(hotspot[pin-four-vr-photo].oy, -130);
+		tween(hotspot[pin-four-vr-close].oy, -435);
+	</action>
+	
+	<action name="exit-pin-one">
+		tween(hotspot[pin-one-vr-photo].alpha, 0);
+		tween(hotspot[pin-one-vr-close].alpha, 0);
+		tween(hotspot[pin-one-vr-photo].oy, -150);
+		tween(hotspot[pin-one-vr-close].oy, -455);
+		delayedcall(0.35,
+			set(hotspot[pin-one-vr-photo].visible, false);
+			set(hotspot[pin-one-vr-close].visible, false);
+		);
+	</action>
+	
+	<action name="exit-pin-two">
+		tween(hotspot[pin-two-vr-photo].alpha, 0);
+		tween(hotspot[pin-two-vr-close].alpha, 0);
+		tween(hotspot[pin-two-vr-photo].oy, -350);
+		tween(hotspot[pin-two-vr-close].oy, -655);
+		delayedcall(0.35,
+			set(hotspot[pin-two-vr-photo].visible, false);
+			set(hotspot[pin-two-vr-close].visible, false);
+		);
+	</action>
+	
+	<action name="exit-pin-three">
+		tween(hotspot[pin-three-vr-photo].alpha, 0);
+		tween(hotspot[pin-three-vr-close].alpha, 0);
+		tween(hotspot[pin-three-vr-photo].oy, -150);
+		tween(hotspot[pin-three-vr-close].oy, -455);
+		delayedcall(0.35,
+			set(hotspot[pin-three-vr-photo].visible, false);
+			set(hotspot[pin-three-vr-close].visible, false);
+		);
+	</action>
+	
+	<action name="exit-pin-four">
+		tween(hotspot[pin-four-vr-photo].alpha, 0);
+		tween(hotspot[pin-four-vr-close].alpha, 0);
+		tween(hotspot[pin-four-vr-photo].oy, -150);
+		tween(hotspot[pin-four-vr-close].oy, -455);
+		delayedcall(0.35,
+			set(hotspot[pin-four-vr-photo].visible, false);
+			set(hotspot[pin-four-vr-close].visible, false);
+		);
+	</action>
+	
+	<action name="close-pins">
+		exit-pin-one();
+		exit-pin-two();
+		exit-pin-three();
+		exit-pin-four();
+	</action>
+	
+	<action name="move-in-ui">
+		tween(layer[button-share].y, 20, 0.35, default);
+		tween(layer[button-enter-fullscreen].x, 20, 0.35, default);
+		tween(layer[button-exit-fullscreen].x, 20, 0.35, default);
+		tween(layer[webvr_enterbutton].x, 20, 0.35, default);
+	</action>
+	
+	<action name="move-out-ui">
+		tween(layer[button-share].y, -110, 0.35, default);
+		tween(layer[button-enter-fullscreen].x, -110, 0.35, default);
+		tween(layer[button-exit-fullscreen].x, -110, 0.35, default);
+		tween(layer[webvr_enterbutton].x, -110, 0.35, default);
+	</action>
+	
+	<action name="pop-out-menu">
+		tween(layer[popup-menu].alpha, 0, 0.35, default);
+		delayedcall(0.35,
+			set(layer[popup-menu].visible, false);
+		);
+	</action>
+	
+	<action name="slide-out-menu">
+		tween(layer[slide-menu].alpha, 0, 0.35, default);
+		delayedcall(0.35,
+			set(layer[slide-menu].visible, false);
+		);
+	</action>
+	
+	<action name="switch-to-vr">
+		set(hotspot[pop-up-one-normal].visible, false); set(hotspot[pop-up-one-vr].visible, true);
+		set(hotspot[pop-up-two-normal].visible, false); set(hotspot[pop-up-two-vr].visible, true);
+		set(hotspot[pop-up-three-normal].visible, false); set(hotspot[pop-up-three-vr].visible, true);
+		set(hotspot[pop-up-four-normal].visible, false); set(hotspot[pop-up-four-vr].visible, true);
+	</action>
+	
+	<action name="switch-to-normal">
+		set(hotspot[pop-up-one-vr].visible, false); set(hotspot[pop-up-one-normal].visible, true);
+		set(hotspot[pop-up-two-vr].visible, false); set(hotspot[pop-up-two-normal].visible, true);
+		set(hotspot[pop-up-three-vr].visible, false); set(hotspot[pop-up-three-normal].visible, true);
+		set(hotspot[pop-up-four-vr].visible, false); set(hotspot[pop-up-four-normal].visible, true);
+	</action>
+	
+</krpano>
